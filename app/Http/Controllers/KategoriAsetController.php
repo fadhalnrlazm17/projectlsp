@@ -2,63 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriAset;
 use Illuminate\Http\Request;
 
 class KategoriAsetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // 1. TAMPILKAN DATA (Read)
     public function index()
     {
-        //
+        $kategori = KategoriAset::all(); // Ambil semua data
+        return view('kategori.index', compact('kategori'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // 2. FORM TAMBAH (Create)
     public function create()
     {
-        //
+        return view('kategori.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // 3. PROSES SIMPAN (Store)
     public function store(Request $request)
     {
-        //
+        // Validasi wajib diisi
+        $request->validate([
+            'nama_kategori' => 'required',
+        ]);
+
+        KategoriAset::create($request->all());
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // 4. FORM EDIT (Edit)
     public function edit(string $id)
     {
-        //
+        $kategori = KategoriAset::findOrFail($id); // Cari data berdasarkan ID
+        return view('kategori.edit', compact('kategori'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // 5. PROSES UPDATE (Update)
     public function update(Request $request, string $id)
     {
-        //
+        $kategori = KategoriAset::findOrFail($id);
+
+        $kategori->update([
+            'nama_kategori' => $request->nama_kategori
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diupdate!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // 6. PROSES HAPUS (Delete)
     public function destroy(string $id)
     {
-        //
+        $kategori = KategoriAset::findOrFail($id);
+        $kategori->delete();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }
