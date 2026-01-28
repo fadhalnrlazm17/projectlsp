@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head><title>Tambah Lokasi</title></head>
+
+<head>
+    <title>Tambah Lokasi</title>
+</head>
+
 <body>
     <h2>Tambah Lokasi Baru</h2>
     <a href="{{ route('lokasi.index') }}">Kembali</a>
@@ -10,7 +14,13 @@
         <label>Nama Lokasi:</label><br>
         <input type="text" name="nama_lokasi" required placeholder="Contoh: Gudang Belakang">
         <br><br>
+
+        <label>Keterangan (Opsional):</label><br>
+        <textarea name="keterangan" placeholder="Contoh: Gedung A Lantai 2" rows="3"></textarea>
+        <br><br>
+        
         <button type="submit">Simpan</button>
     </form>
 </body>
+
 </html>

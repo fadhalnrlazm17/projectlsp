@@ -20,6 +20,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama Lokasi</th>
+                <th>Keterangan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $l->nama_lokasi }}</td>
+                    <td>{{ $l->keterangan }}</td>
                     <td>
                         <a href="{{ route('lokasi.edit', $l->id) }}">Edit</a>
                         @if (Auth::user()->role == 'admin')

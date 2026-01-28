@@ -38,7 +38,12 @@ class LokasiController extends Controller
     public function update(Request $request, string $id)
     {
         $lokasi = Lokasi::findOrFail($id);
-        $lokasi->update(['nama_lokasi' => $request->nama_lokasi]);
+
+        // Salah, karna hanya update nama
+        // $lokasi->update(['nama_lokasi' => $request->nama_lokasi]);
+
+        // Update semua data yang dikirim dari form
+        $lokasi->update($request->all());
 
         return redirect()->route('lokasi.index')->with('success', 'Lokasi berhasil diupdate!');
     }

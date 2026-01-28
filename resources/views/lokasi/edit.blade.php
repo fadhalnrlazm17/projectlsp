@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head><title>Edit Lokasi</title></head>
+
+<head>
+    <title>Edit Lokasi</title>
+</head>
+
 <body>
     <h2>Edit Lokasi</h2>
     <a href="{{ route('lokasi.index') }}">Kembali</a>
@@ -10,7 +14,13 @@
         <label>Nama Lokasi:</label><br>
         <input type="text" name="nama_lokasi" value="{{ $lokasi->nama_lokasi }}" required>
         <br><br>
+
+        <label>Keterangan (Opsional):</label><br>
+        <textarea name="keterangan" rows="3">{{ $lokasi->keterangan }}</textarea>
+        <br><br>
+
         <button type="submit">Update</button>
     </form>
 </body>
+
 </html>
