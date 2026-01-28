@@ -21,11 +21,18 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+        ]);
 
-        $this->call([
-            UserSeeder::class,
-            KategoriAsetSeeder::class,
-            LokasiSeeder::class,
+        User::create([
+            'name' => 'Petugas Lab',
+            'email' => 'petugas@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'petugas',
         ]);
     }
 }
