@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Daftar Kategori</title>
 </head>
+
 <body>
 
     <h1>Manajemen Kategori Aset</h1>
@@ -10,7 +12,7 @@
     <a href="{{ route('kategori.create') }}">+ Tambah Kategori Baru</a>
     <br><br>
 
-    @if(session('success'))
+    @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
 
@@ -23,22 +25,28 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($kategori as $k)
-            <tr>
-                <td>{{ $loop->iteration }}</td> <td>{{ $k->nama_kategori }}</td>
-                <td>
-                    <a href="{{ route('kategori.edit', $k->id) }}">Edit</a>
+            @foreach ($kategori as $k)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $k->nama_kategori }}</td>
+                    <td>
+                        <a href="{{ route('kategori.edit', $k->id) }}">Edit</a>
 
-                    <form action="{{ route('kategori.destroy', $k->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin hapus data ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" style="color:red; border:none; background:none; cursor:pointer;">Hapus</button>
-                    </form>
-                </td>
-            </tr>
+                        @if (Auth::user()->role == 'admin')
+                            <form action="{{ route('kategori.destroy', $k->id) }}" method="POST" style="display:inline;"
+                                onsubmit="return confirm('Yakin hapus data ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    style="color:red; border:none; background:none; cursor:pointer;">Hapus</button>
+                            </form>
+                        @endif
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
 
 </body>
+
 </html>
